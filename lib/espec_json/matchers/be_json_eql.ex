@@ -1,7 +1,7 @@
 defmodule ESpec.Json.Matchers.BeJsonEql do
   use ESpec.Assertions.Interface
 
-  defp match(subject, value) do
+  defp match(subject, value) when is_binary(value) do
     normalized_subject = normalize_json(subject)
     normalized_value   = normalize_json(value)
     result = normalized_subject == normalized_value
@@ -20,6 +20,6 @@ defmodule ESpec.Json.Matchers.BeJsonEql do
   end
 
   defp normalize_json(json) do
-    Poison.decode(json)
+    Poison.decode!(json)
   end
 end

@@ -6,7 +6,7 @@ defmodule ESpec.Json.Matchers.BeJsonEqlSpec do
   describe "be_json_eql" do
     subject do: json
 
-    context "with valid JSON" do
+    context "with valid JSON as the subject" do
       let :json do
         path = "spec/support/json/valid.json"
         {:ok, json} = File.read(path)
@@ -52,13 +52,19 @@ defmodule ESpec.Json.Matchers.BeJsonEqlSpec do
 
         it do: should_not be_json_eql(very_different_json)
       end
-    end
 
-    context "with invalid JSON" do
-      let :json do
-        path = "spec/support/json/invalid.json"
-        {:ok, json} = File.read(path)
-        json
+      context "compared against invalid JSON" do
+        let :invalid_json do
+          path = "spec/support/json/invalid.json"
+          {:ok, json} = File.read(path)
+          json
+        end
+
+        it "raises an exception" do
+          raiser = fn -> be_json_eql(invalid_json) end
+
+          expect raiser.() |> to(raise_exception)
+        end
       end
     end
   end
