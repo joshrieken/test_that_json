@@ -1,6 +1,7 @@
 defmodule ESpec.Json.Matchers.BeJsonEql do
   use ESpec.Assertions.Interface
 
+  import ESpec.Json.Exclusion
   import ESpec.Json.Parsing
 
   defp match(subject, value) when is_binary(value) do
@@ -24,6 +25,6 @@ defmodule ESpec.Json.Matchers.BeJsonEql do
   end
 
   defp normalize_json(json) do
-    parse!(json)
+    exclude_keys(parse!(json))
   end
 end

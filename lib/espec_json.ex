@@ -1,3 +1,8 @@
 defmodule ESpec.Json do
-  import ESpec.Json.Matchers
+  defmacro __using__(_) do
+    quote do
+      import ESpec.Json.Configuration
+      import ESpec.Json.Matchers
+    end
+  end
 end
