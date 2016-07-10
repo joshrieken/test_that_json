@@ -7,7 +7,7 @@ Matchers:
 - [x] `be_json_eql`
 - [x] `have_json_keys`
 - [x] `have_only_json_keys`
-- [ ] `have_json_values`
+- [x] `have_json_values`
 - [ ] `have_only_json_values`
 - [ ] `have_json_properties`
 - [ ] `have_only_json_properties`
