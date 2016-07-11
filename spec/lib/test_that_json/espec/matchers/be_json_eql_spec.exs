@@ -1,7 +1,7 @@
-defmodule ESpec.Json.Matchers.BeJsonEqlSpec do
+defmodule TestThatJson.ESpec.Matchers.BeJsonEqlSpec do
   use ESpec
 
-  import ESpec.Json.Matchers, only: [be_json_eql: 1]
+  import TestThatJson.ESpec.Matchers, only: [be_json_eql: 1]
 
   describe "be_json_eql" do
     subject do: json

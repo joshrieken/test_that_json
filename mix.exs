@@ -1,9 +1,9 @@
-defmodule EspecJson.Mixfile do
+defmodule TestThatJson.Mixfile do
   use Mix.Project
 
   def project do
     [
-      app:             :espec_json,
+      app:             :test_that_json,
       version:         "0.1.0",
       elixir:          "~> 1.3",
       build_embedded:  Mix.env == :prod,
@@ -33,14 +33,14 @@ defmodule EspecJson.Mixfile do
     [
       maintainers: ["Joshua Rieken"],
       licenses: ["MIT"],
-      links: %{"GitHub" => "https://github.com/facto/espec_json"},
+      links: %{"GitHub" => "https://github.com/facto/test_that_json"},
       files: ~w(mix.exs README.md CHANGELOG.md lib),
     ]
   end
 
   defp description do
     """
-    JSON helpers for ESpec
+    JSON helpers for your Elixir testing needs
     """
   end
 
@@ -55,7 +55,7 @@ defmodule EspecJson.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      {:espec,  "~> 0.8.22"},
+      {:espec,  "~> 0.8.22", only: :test},
       {:poison, "~> 2.2.0"},
     ]
   end

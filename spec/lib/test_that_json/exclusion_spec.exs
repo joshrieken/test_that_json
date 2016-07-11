@@ -1,8 +1,8 @@
-defmodule ESpec.Json.ExclusionSpec do
+defmodule TestThatJson.ExclusionSpec do
   use ESpec
 
-  alias ESpec.Json.Configuration
-  alias ESpec.Json.Exclusion
+  alias TestThatJson.Configuration
+  alias TestThatJson.Exclusion
 
   describe "exclude_keys" do
     subject do: exclusion_result

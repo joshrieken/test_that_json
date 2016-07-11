@@ -10,11 +10,11 @@ use Mix.Config
 
 # You can configure for your application as:
 #
-#     config :espec_json, key: :value
+#     config :test_that_json, key: :value
 #
 # And access this configuration in your application as:
 #
-#     Application.get_env(:espec_json, :key)
+#     Application.get_env(:test_that_json, :key)
 #
 # Or configure a 3rd-party app:
 #

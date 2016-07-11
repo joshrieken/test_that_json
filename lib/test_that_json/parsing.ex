@@ -1,4 +1,4 @@
-defmodule ESpec.Json.Parsing do
+defmodule TestThatJson.Parsing do
   def parse!(json) do
     Poison.decode!(json)
   end

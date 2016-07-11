@@ -1,5 +1,5 @@
-defmodule ESpec.Json.Exclusion do
-  alias ESpec.Json.Configuration
+defmodule TestThatJson.Exclusion do
+  alias TestThatJson.Configuration
 
   def exclude_keys(list) when is_list(list) do
     for value <- list, do: exclude_keys(value)

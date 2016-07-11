@@ -1,7 +1,7 @@
-defmodule ESpec.Json.Matchers.HaveJsonKeysSpec do
+defmodule TestThatJson.ESpec.Matchers.HaveJsonKeysSpec do
   use ESpec
 
-  import ESpec.Json.Matchers, only: [have_json_keys: 1]
+  import TestThatJson.ESpec.Matchers, only: [have_json_keys: 1]
 
   subject do: json
 

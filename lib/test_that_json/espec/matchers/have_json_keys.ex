@@ -1,8 +1,8 @@
-defmodule ESpec.Json.Matchers.HaveJsonKeys do
+defmodule TestThatJson.ESpec.Matchers.HaveJsonKeys do
   use ESpec.Assertions.Interface
 
-  import ESpec.Json.Exclusion
-  import ESpec.Json.Parsing
+  import TestThatJson.Exclusion
+  import TestThatJson.Parsing
 
   defp match(subject, value) do
     parsed_subject   = parse!(subject)

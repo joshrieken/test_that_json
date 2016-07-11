@@ -1,6 +1,10 @@
-# ESpec JSON
+# Test That JSON!
 
-JSON matchers and helpers for [ESpec](https://github.com/antonmi/espec).
+JSON helpers and matchers for ExUnit and [ESpec](https://github.com/antonmi/espec).
+
+## ExUnit
+
+## ESpec
 
 Matchers:
 
@@ -41,16 +45,20 @@ These are simple strings of "/" separated hash keys and array indexes. For insta
 
 We could access the first friend's first name with the path "friends/0/first_name".
 
-## Inspiration
+## Thanks
 
 Thanks to the creators and maintainers of the [Ruby json_spec](https://github.com/collectiveidea/json_spec) project for heavy inspiration.
 
 ## Installation
 
-1. Add `espec_json` to your list of dependencies in `mix.exs`:
+1. Add `test_that_json` to your list of dependencies in `mix.exs`:
 
   ```elixir
   def deps do
-    [{:espec_json, "~> 0.1.0", only: :test}]
+    [{:test_that_json, "~> 0.1.0", only: :test}]
   end
   ```
+
+### Using ESpec
+
+Make sure espec is in your `mix.exs` as well.

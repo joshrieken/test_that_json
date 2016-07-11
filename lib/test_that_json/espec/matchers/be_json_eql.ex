@@ -1,8 +1,8 @@
-defmodule ESpec.Json.Matchers.BeJsonEql do
+defmodule TestThatJson.ESpec.Matchers.BeJsonEql do
   use ESpec.Assertions.Interface
 
-  import ESpec.Json.Exclusion
-  import ESpec.Json.Parsing
+  import TestThatJson.Exclusion
+  import TestThatJson.Parsing
 
   defp match(subject, value) when is_binary(value) do
     normalized_subject = normalize_json(subject)
