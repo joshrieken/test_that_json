@@ -9,8 +9,11 @@ defmodule TestThatJson.ESpec.Matchers do
 
   def be_json_eql(json), do: {BeJsonEql, json}
 
-  def have_json_keys(list_or_value),      do: {HaveJsonKeys,     list_or_value}
-  def have_only_json_keys(list_or_value), do: {HaveOnlyJsonKeys, list_or_value}
+  def have_json_keys(value),      do: {HaveJsonKeys,     value}
+  def have_only_json_keys(value), do: {HaveOnlyJsonKeys, value}
+
+  def have_json_values(value),      do: {HaveJsonValues,     value}
+  def have_only_json_values(value), do: {HaveOnlyJsonValues, value}
 
   def have_json_values(list_or_value),      do: {HaveJsonValues,     list_or_value}
   def have_only_json_values(list_or_value), do: {HaveOnlyJsonValues, list_or_value}
