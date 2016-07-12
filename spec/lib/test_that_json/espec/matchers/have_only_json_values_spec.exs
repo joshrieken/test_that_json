@@ -130,12 +130,7 @@ defmodule TestThatJson.ESpec.Matchers.HaveOnlyJsonValuesSpec do
           {
             "some": "object",
             "another": "key with value"
-          },
-          {
-            "another": "object"
-          },
-          ["a list with a string"],
-          "some string"
+          }
         ]
         """
       end
@@ -146,14 +141,44 @@ defmodule TestThatJson.ESpec.Matchers.HaveOnlyJsonValuesSpec do
 
     context "when the value is a string" do
       context "when the string is valid JSON" do
+        let :json do
+          """
+          [
+            ["a list with a string"]
+          ]
+          """
+        end
+
         it do: should have_only_json_values("[\"a list with a string\"]")
         it do: should_not have_only_json_values("\"a list with a string\"")
       end
 
       context "when the string is not JSON" do
-        it do: should have_only_json_values("some string")
+        let :json do
+          """
+          [
+            "a list with a string"
+          ]
+          """
+        end
+
+        it do: should have_only_json_values("a list with a string")
         it do: should_not have_only_json_values("some other string")
       end
+    end
+  end
+
+  context "when the subject is a JSON string" do
+    let :json, do: "\"string\""
+
+    context "when the value is a JSON string" do
+      it do: should have_only_json_values("\"string\"")
+      it do: should_not have_only_json_values("\"another string\"")
+    end
+
+    context "when the value is a string but not JSON" do
+      it do: should have_only_json_values("string")
+      it do: should_not have_only_json_values("another string")
     end
   end
 end
