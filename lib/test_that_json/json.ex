@@ -12,6 +12,11 @@ defmodule TestThatJson.Json do
     do_has_only_keys?(processed_subject, processed_value)
   end
 
+  def has_values?(subject, value) do
+    {processed_subject, processed_value} = process_for_values(subject, value)
+    do_has_values?(processed_subject, processed_value)
+  end
+
   def has_properties?(subject, value) do
     {processed_subject, processed_value} = process(subject, value)
     do_has_properties?(processed_subject, processed_value)
@@ -63,6 +68,25 @@ defmodule TestThatJson.Json do
     {:error, ArgumentError, [invalid_subject, invalid_value], "Subject must be a map and value must be a list or a String.t"}
   end
 
+  defp do_has_values?(map_subject, list_value) when is_map(map_subject) and is_list(list_value) do
+    values = Map.values(map_subject)
+    Enum.all?(list_value, &Enum.member?(values, &1))
+  end
+  defp do_has_values?(map_subject, value) when is_map(map_subject) do
+    values = Map.values(map_subject)
+    Enum.member?(values, value)
+  end
+  defp do_has_values?(list_subject, list_value) when is_list(list_subject) and is_list(list_value) and list_subject == list_value, do: true
+  defp do_has_values?(list_subject, list_value) when is_list(list_subject) and is_list(list_value) do
+    Enum.all?(list_value, &Enum.member?(list_subject, &1))
+  end
+  defp do_has_values?(list_subject, value) when is_list(list_subject) do
+    Enum.member?(list_subject, value)
+  end
+  defp do_has_values?(subject, value) do
+    subject == value
+  end
+
   def do_has_properties?(subject_map, other_map) when is_map(subject_map) and is_map(other_map) do
     Enum.all?(Map.keys(other_map), fn(key) -> Map.get(subject_map, key) == Map.get(other_map, key) end)
   end
@@ -93,12 +117,34 @@ defmodule TestThatJson.Json do
     {scrubbed_subject, scrubbed_value}
   end
 
+  defp process_for_values(subject, value) do
+    normalized_subject = normalize(subject)
+    normalized_value   = normalize_for_values(value)
+
+    scrubbed_subject = scrub(normalized_subject)
+    scrubbed_value   = scrub(normalized_value)
+
+    {scrubbed_subject, scrubbed_value}
+  end
+
   defp normalize(value) do
     case parse(value) do
       {:ok, parsed_value} -> parsed_value
       {:error, _}         -> value
     end
   end
+
+  defp normalize_for_values(value) when is_binary(value) do
+    case parse(value) do
+      {:ok, parsed_value} ->
+        case parsed_value do
+          parsed_value when is_list(parsed_value) -> [parsed_value]
+          parsed_value                            -> parsed_value
+        end
+      {:error, _} -> value
+    end
+  end
+  defp normalize_for_values(value), do: normalize(value)
 
   defp scrub(value), do: exclude_keys(value)
 end

@@ -1,19 +1,13 @@
 defmodule TestThatJson.ESpec.Matchers.HaveJsonValues do
   use ESpec.Assertions.Interface
 
-  import TestThatJson.Exclusion
-  import TestThatJson.Parsing
+  alias TestThatJson.Json
 
   defp match(subject, value) do
-    parsed_subject   = parse!(subject)
-    scrubbed_subject = exclude_keys(parsed_subject)
-
-    parsed_value   = parse_value(value)
-    scrubbed_value = exclude_keys(parsed_value)
-
-    result = have_json_values?(scrubbed_subject, scrubbed_value)
-
-    {result, result}
+    case Json.has_values?(subject, value) do
+      {:error, module, _args, message} -> raise module, message
+      result                           -> {result, result}
+    end
   end
 
   defp success_message(subject, value, _result, positive) do
@@ -38,23 +32,4 @@ defmodule TestThatJson.ESpec.Matchers.HaveJsonValues do
     end
   end
   defp parse_value(value), do: value
-
-  defp have_json_values?(map_subject, list_value) when is_map(map_subject) and is_list(list_value) do
-    values = Map.values(map_subject)
-    Enum.all?(list_value, &Enum.member?(values, &1))
-  end
-  defp have_json_values?(map_subject, value) when is_map(map_subject) do
-    values = Map.values(map_subject)
-    Enum.member?(values, value)
-  end
-  defp have_json_values?(list_subject, list_value) when is_list(list_subject) and is_list(list_value) and list_subject == list_value, do: true
-  defp have_json_values?(list_subject, list_value) when is_list(list_subject) and is_list(list_value) do
-    Enum.all?(list_value, &Enum.member?(list_subject, &1))
-  end
-  defp have_json_values?(list_subject, value) when is_list(list_subject) do
-    Enum.member?(list_subject, value)
-  end
-  defp have_json_values?(subject, value) do
-    subject == value
-  end
 end
