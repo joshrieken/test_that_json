@@ -7,6 +7,11 @@ defmodule TestThatJson.Json do
     do_has_keys?(processed_subject, processed_value)
   end
 
+  def has_only_keys?(subject, value) do
+    {processed_subject, processed_value} = process(subject, value)
+    do_has_only_keys?(processed_subject, processed_value)
+  end
+
   def has_properties?(subject, value) do
     {processed_subject, processed_value} = process(subject, value)
     do_has_properties?(processed_subject, processed_value)
@@ -35,6 +40,26 @@ defmodule TestThatJson.Json do
     {:error, ArgumentError, [invalid_subject], "Subject must be a map"}
   end
   defp do_has_keys?(invalid_subject, invalid_value) do
+    {:error, ArgumentError, [invalid_subject, invalid_value], "Subject must be a map and value must be a list or a String.t"}
+  end
+
+  defp do_has_only_keys?(subject_map, list_value) when is_map(subject_map) and is_list(list_value) do
+    keys = Map.keys(subject_map)
+    sorted_keys = Enum.sort(keys)
+    sorted_list_value = Enum.sort(list_value)
+    sorted_keys == sorted_list_value
+  end
+  defp do_has_only_keys?(subject_map, value) when is_map(subject_map) do
+    keys = Map.keys(subject_map)
+    length(keys) == 1 && List.first(keys) == value
+  end
+  defp do_has_only_keys?(subject_map, invalid_value) when is_map(subject_map) do
+    {:error, ArgumentError, [invalid_value], "Value must be a list or a String.t"}
+  end
+  defp do_has_only_keys?(invalid_subject, value) when is_list(value) or is_binary(value) do
+    {:error, ArgumentError, [invalid_subject], "Subject must be a map"}
+  end
+  defp do_has_only_keys?(invalid_subject, invalid_value) do
     {:error, ArgumentError, [invalid_subject, invalid_value], "Subject must be a map and value must be a list or a String.t"}
   end
 
