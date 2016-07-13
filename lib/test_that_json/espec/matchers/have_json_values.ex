@@ -20,16 +20,4 @@ defmodule TestThatJson.ESpec.Matchers.HaveJsonValues do
     but = if positive, do: "doesn't", else: "does"
     "Expected `#{inspect subject}` #{to} JSON values `#{inspect value}`, but it #{but}."
   end
-
-  defp parse_value(value) when is_binary(value) do
-    case parse(value) do
-      {:ok, json} ->
-        case json do
-          json when is_list(json) -> [json]
-          json                    -> json
-        end
-      {:error, _} -> value
-    end
-  end
-  defp parse_value(value), do: value
 end
