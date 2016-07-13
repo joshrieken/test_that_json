@@ -1,7 +1,7 @@
 defmodule TestThatJson.ESpec.HaveOnlyJsonPropertiesSpec do
   use ESpec
 
-  import TestThatJson.ESpec.Matchers, only: [have_json_properties: 1]
+  import TestThatJson.ESpec.Matchers, only: [have_only_json_properties: 1]
 
   subject do: json
 
@@ -16,10 +16,11 @@ defmodule TestThatJson.ESpec.HaveOnlyJsonPropertiesSpec do
     end
 
     context "when the argument is a map" do
-      it do: should have_json_properties(%{"some" => "property"})
-      it do: should have_json_properties(%{"some" => "property", "another" => "property with value"})
-      it do: should_not have_json_properties(%{"some_other" => "property"})
-      it do: should_not have_json_properties(%{"some" => "property", "some_other" => "property"})
+      it do: should have_only_json_properties(%{"some" => "property", "another" => "property with value"})
+      it do: should_not have_only_json_properties(%{"some" => "property"})
+      it do: should_not have_only_json_properties(%{"some" => "property", "another" => "property with value", "one" => "more"})
+      it do: should_not have_only_json_properties(%{"some_other" => "property"})
+      it do: should_not have_only_json_properties(%{"some" => "property", "some_other" => "property"})
     end
 
     context "when the argument is not a map" do
@@ -27,7 +28,7 @@ defmodule TestThatJson.ESpec.HaveOnlyJsonPropertiesSpec do
 
       it "raises an error" do
         raiser = fn ->
-          expect json |> to(have_json_properties(["some"]))
+          expect json |> to(have_only_json_properties(["some"]))
         end
 
         expect raiser |> to(raise_exception(ArgumentError))
@@ -47,7 +48,7 @@ defmodule TestThatJson.ESpec.HaveOnlyJsonPropertiesSpec do
 
     it "raises an error" do
       raiser = fn ->
-        expect json |> to(have_json_properties(["some"]))
+        expect json |> to(have_only_json_properties(["some"]))
       end
 
       expect raiser |> to(raise_exception(ArgumentError))
