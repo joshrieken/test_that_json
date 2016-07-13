@@ -17,6 +17,11 @@ defmodule TestThatJson.Json do
     do_has_values?(processed_subject, processed_value)
   end
 
+  def has_only_values?(subject, value) do
+    {processed_subject, processed_value} = process_for_values(subject, value)
+    do_has_only_values?(processed_subject, processed_value)
+  end
+
   def has_properties?(subject, value) do
     {processed_subject, processed_value} = process(subject, value)
     do_has_properties?(processed_subject, processed_value)
@@ -84,6 +89,26 @@ defmodule TestThatJson.Json do
     Enum.member?(list_subject, value)
   end
   defp do_has_values?(subject, value) do
+    subject == value
+  end
+
+  defp do_has_only_values?(map_subject, list_value) when is_map(map_subject) and is_list(list_value) do
+    values = Map.values(map_subject)
+    sorted_values = Enum.sort(values)
+    sorted_list_value = Enum.sort(list_value)
+    sorted_values == sorted_list_value
+  end
+  defp do_has_only_values?(map_subject, value) when is_map(map_subject) do
+    subject_values = Map.values(map_subject)
+    length(subject_values) == 1 && List.first(subject_values) == value
+  end
+  defp do_has_only_values?(list_subject, list_value) when is_list(list_subject) and is_list(list_value) do
+    list_subject == list_value
+  end
+  defp do_has_only_values?(list_subject, value) when is_list(list_subject) do
+    length(list_subject) == 1 && List.first(list_subject) == value
+  end
+  defp do_has_only_values?(subject, value) do
     subject == value
   end
 
