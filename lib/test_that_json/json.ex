@@ -112,14 +112,14 @@ defmodule TestThatJson.Json do
     subject == value
   end
 
-  def do_has_properties?(subject_map, other_map) when is_map(subject_map) and is_map(other_map) do
+  defp do_has_properties?(subject_map, other_map) when is_map(subject_map) and is_map(other_map) do
     Enum.all?(Map.keys(other_map), fn(key) -> Map.get(subject_map, key) == Map.get(other_map, key) end)
   end
-  def do_has_properties?(invalid_subject, invalid_value) do
+  defp do_has_properties?(invalid_subject, invalid_value) do
     {:error, ArgumentError, [invalid_subject, invalid_value], "Arguments must be maps"}
   end
 
-  def do_has_only_properties?(subject_map, other_map) when is_map(subject_map) and is_map(other_map) do
+  defp do_has_only_properties?(subject_map, other_map) when is_map(subject_map) and is_map(other_map) do
     map_keys = Map.keys(subject_map)
     other_map_keys = Map.keys(other_map)
 
@@ -128,7 +128,7 @@ defmodule TestThatJson.Json do
       false -> false
     end
   end
-  def do_has_only_properties?(invalid_subject, invalid_value) do
+  defp do_has_only_properties?(invalid_subject, invalid_value) do
     {:error, ArgumentError, [invalid_subject, invalid_value], "Arguments must be maps"}
   end
 
