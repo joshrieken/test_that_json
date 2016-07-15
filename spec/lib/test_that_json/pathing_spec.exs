@@ -66,7 +66,7 @@ defmodule TestThatJson.PathingSpec do
           expect subject |> to(eq(""))
         end
 
-        expect raiser |> to(raise_exception(ArgumentError))
+        expect raiser |> to(raise_exception(TestThatJson.InvalidPathError))
       end
     end
   end
