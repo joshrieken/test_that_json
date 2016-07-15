@@ -3,68 +3,81 @@ defmodule TestThatJson.ESpec.Matchers.BeJsonEqlSpec do
 
   import TestThatJson.ESpec.Matchers, only: [be_json_eql: 1]
 
-  describe "be_json_eql" do
-    subject do: json
+  subject do: json
 
-    context "with valid JSON as the subject" do
-      let :json do
-        path = "spec/support/json/valid.json"
-        {:ok, json} = File.read(path)
-        json
+  context "when the subject is a JSON object" do
+    let :json do
+      """
+      {
+        "some": "object",
+        "another": "key with value",
+        "key_with_object": {
+          "nested": "object y'all"
+        }
+      }
+      """
+    end
+
+    let :slightly_different_json do
+      """
+      {
+        "another": "key with value",
+        "some": "object",
+        "key_with_object": {
+          "nested": "object y'all"
+        }
+      }
+      """
+    end
+
+    let :different_json do
+      """
+      {
+        "some": "object",
+        "key_with_object": {
+          "nested": "object y'all"
+        }
+      }
+      """
+    end
+
+    it do: should be_json_eql(json)
+    it do: should be_json_eql(slightly_different_json)
+    it do: should_not be_json_eql(different_json)
+  end
+
+  context "when the subject is a JSON array" do
+    let :json, do: "[1,2,3,4]"
+
+    it do: should be_json_eql(json)
+    it do: should_not be_json_eql("[1,3,2,4]")
+    it do: should_not be_json_eql("[1,2,3]")
+    it do: should_not be_json_eql("{\"different\": \"json\"}")
+
+    context "when the value is not valid JSON" do
+      it "raises an exception" do
+        raiser = fn -> expect subject |> to(be_json_eql("invalid json")) end
+
+        expect raiser |> to(raise_exception(TestThatJson.InvalidJsonError))
       end
+    end
+  end
 
-      context "compared against exactly the same JSON" do
-        let :same_json do
-          path = "spec/support/json/valid.json"
-          {:ok, json} = File.read(path)
-          json
-        end
+  context "when the subject is a JSON string" do
+    let :json, do: "\"json string\""
 
-        it do: should be_json_eql(same_json)
-      end
+    it do: should be_json_eql(json)
+    it do: should_not be_json_eql("\"josn string\"")
+  end
 
-      context "compared against the same JSON with keys in a different order" do
-        let :json_different_order do
-          path = "spec/support/json/valid_different_key_order.json"
-          {:ok, json} = File.read(path)
-          json
-        end
+  context "when the subject is not valid JSON" do
+    let :json, do: "invalid"
 
-        it do: should be_json_eql(json_different_order)
-      end
+    context "when the value is not valid JSON" do
+      it "raises an exception" do
+        raiser = fn -> expect subject |> to(be_json_eql("invalid json")) end
 
-      context "compared against JSON that is slightly different" do
-        let :slightly_different_json do
-          path = "spec/support/json/valid_slightly_different.json"
-          {:ok, json} = File.read(path)
-          json
-        end
-
-        it do: should_not be_json_eql(slightly_different_json)
-      end
-
-      context "compared against JSON that is slightly different" do
-        let :very_different_json do
-          path = "spec/support/json/valid_very_different.json"
-          {:ok, json} = File.read(path)
-          json
-        end
-
-        it do: should_not be_json_eql(very_different_json)
-      end
-
-      context "compared against invalid JSON" do
-        let :invalid_json do
-          path = "spec/support/json/invalid.json"
-          {:ok, json} = File.read(path)
-          json
-        end
-
-        it "raises an exception" do
-          raiser = fn -> be_json_eql(invalid_json) end
-
-          expect raiser.() |> to(raise_exception)
-        end
+        expect raiser |> to(raise_exception(TestThatJson.InvalidJsonError))
       end
     end
   end
