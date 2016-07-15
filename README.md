@@ -15,7 +15,7 @@ Matchers:
 - [x] `have_only_json_values`
 - [x] `have_json_properties`
 - [x] `have_only_json_properties`
-- [ ] `have_json_path`
+- [x] `have_json_path`
 - [ ] `have_json_type`
 - [ ] `have_json_size`
 
