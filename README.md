@@ -23,12 +23,14 @@ Helpers:
 
 - [x] `parse_json`
 - [x] `parse_json!`
-- [ ] `normalize_json`
-- [ ] `normalize_json!`
-- [ ] `generate_normalized_json`
-- [ ] `generate_normalized_json!`
-- [ ] `load_json`
-- [ ] `load_json!`
+- [x] `to_json`
+- [x] `to_json!`
+- [x] `prettify_json`
+- [x] `prettify_json!`
+- [x] `to_prettified_json`
+- [x] `to_prettified_json!`
+- [x] `load_json`
+- [x] `load_json!`
 
 ## Paths
 
