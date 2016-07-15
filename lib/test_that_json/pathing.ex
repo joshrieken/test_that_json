@@ -3,7 +3,7 @@ defmodule TestThatJson.Pathing do
     path_parts = String.split(path, "/")
     Enum.reduce(path_parts, value, &do_value_at_path/2)
   end
-  def value_at_path(value, _path), do: value
+  def value_at_path(_value, _path), do: raise TestThatJson.InvalidPathError
 
   # PRIVATE ##################################################
 
@@ -14,7 +14,5 @@ defmodule TestThatJson.Pathing do
     {index, _} = Integer.parse(path_part)
     Enum.at(list_value, index)
   end
-  defp do_value_at_path(_path_part, _value) do
-    raise ArgumentError, "Invalid path"
-  end
+  defp do_value_at_path(_path_part, _value), do: raise TestThatJson.InvalidPathError
 end

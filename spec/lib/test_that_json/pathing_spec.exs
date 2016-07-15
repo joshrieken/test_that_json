@@ -6,6 +6,13 @@ defmodule TestThatJson.PathingSpec do
   describe "value_at_path" do
     subject do: Pathing.value_at_path(value, path)
 
+    context "when the path is nil" do
+      let :value, do: %{"some" => "map"}
+      let :path, do: nil
+
+      it do: should eq(value)
+    end
+
     context "when the value is a map" do
       let :value do
         %{
