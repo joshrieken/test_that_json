@@ -38,6 +38,18 @@ defmodule TestThatJson.PathingSpec do
         let :path,  do: "id/0"
 
         it do: should eq("1234")
+
+        context "when the key does not exist" do
+          let :path,  do: "does_not_exist"
+
+          it "raises an error" do
+            raiser = fn ->
+              expect subject |> to(eq(""))
+            end
+
+            expect raiser |> to(raise_exception(TestThatJson.PathNotFoundError))
+          end
+        end
       end
     end
 
@@ -49,9 +61,23 @@ defmodule TestThatJson.PathingSpec do
         ]
       end
 
-      let :path,  do: "1"
+      context "when the index is valid" do
+        let :path,  do: "1"
 
-      it do: should eq("9876")
+        it do: should eq("9876")
+      end
+
+      context "when the index is not valid" do
+        let :path,  do: "10"
+
+        it "raises an error" do
+          raiser = fn ->
+            expect subject |> to(eq(""))
+          end
+
+          expect raiser |> to(raise_exception(TestThatJson.PathNotFoundError))
+        end
+      end
     end
 
     context "when the value is a non-list, non-map" do

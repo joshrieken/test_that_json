@@ -9,11 +9,17 @@ defmodule TestThatJson.Pathing do
   # PRIVATE ##################################################
 
   defp do_value_at_path(path_part, map_value)  when is_map(map_value) do
-    Map.get(map_value, path_part, :error)
+    case Map.get(map_value, path_part, :error) do
+      :error -> raise TestThatJson.PathNotFoundError
+      value  -> value
+    end
   end
   defp do_value_at_path(path_part, list_value) when is_list(list_value) do
     {index, _} = Integer.parse(path_part)
-    Enum.at(list_value, index)
+    case Enum.at(list_value, index, :error) do
+      :error -> raise TestThatJson.PathNotFoundError
+      value  -> value
+    end
   end
   defp do_value_at_path(_path_part, _value), do: raise TestThatJson.InvalidPathError
 end
