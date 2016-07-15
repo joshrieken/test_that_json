@@ -1,13 +1,13 @@
 defmodule TestThatJson.Parsing do
   def parse!(json) when is_binary(json) do
-    Poison.decode!(json)
+    JSX.decode!(json)
   rescue
-    _ in Poison.SyntaxError -> raise TestThatJson.InvalidJsonError
+    _ in ArgumentError -> raise TestThatJson.InvalidJsonError
   end
   def parse!(value), do: value
 
   def parse(json) when is_binary(json) do
-    Poison.decode(json)
+    JSX.decode(json)
   end
   def parse(value), do: {:ok, value}
 end
