@@ -21,10 +21,14 @@ Matchers:
 
 Helpers:
 
-- [ ] `parse_json`
+- [x] `parse_json`
+- [x] `parse_json!`
 - [ ] `normalize_json`
+- [ ] `normalize_json!`
 - [ ] `generate_normalized_json`
+- [ ] `generate_normalized_json!`
 - [ ] `load_json`
+- [ ] `load_json!`
 
 ## Paths
 

@@ -5,3 +5,7 @@ end
 defmodule TestThatJson.PathNotFoundError do
   defexception message: "The provided path was not found"
 end
+
+defmodule TestThatJson.InvalidJsonError do
+  defexception message: "The provided JSON could not be parsed"
+end
