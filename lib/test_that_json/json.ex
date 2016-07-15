@@ -1,6 +1,7 @@
 defmodule TestThatJson.Json do
   import TestThatJson.Exclusion
   import TestThatJson.Parsing
+  import TestThatJson.Pathing
 
   def has_keys?(subject, value) do
     {processed_subject, processed_value} = process(subject, value)
@@ -30,6 +31,11 @@ defmodule TestThatJson.Json do
   def has_only_properties?(subject, value) do
     {processed_subject, processed_value} = process(subject, value)
     do_has_only_properties?(processed_subject, processed_value)
+  end
+
+  def has_path?(subject, path) do
+    processed_subject = process(subject)
+    do_has_path?(processed_subject, path)
   end
 
 
@@ -132,14 +138,27 @@ defmodule TestThatJson.Json do
     {:error, ArgumentError, [invalid_subject, invalid_value], "Arguments must be maps"}
   end
 
-  defp process(subject, value) do
+  defp do_has_path?(subject, path) when is_binary(path) do
+    value_at_path(subject, path)
+    true
+  rescue
+    _ in TestThatJson.PathNotFoundError -> false
+  end
+
+
+
+
+
+
+
+  defp process(subject) do
     normalized_subject = normalize(subject)
-    normalized_value   = normalize(value)
-
-    scrubbed_subject = scrub(normalized_subject)
-    scrubbed_value   = scrub(normalized_value)
-
-    {scrubbed_subject, scrubbed_value}
+    scrub(normalized_subject)
+  end
+  defp process(subject, value) do
+    processed_subject = process(subject)
+    processed_value   = process(value)
+    {processed_subject, processed_value}
   end
 
   defp process_for_values(subject, value) do

@@ -10,6 +10,8 @@ defmodule TestThatJson.ESpec.Matchers do
   alias TestThatJson.ESpec.Matchers.HaveJsonProperties
   alias TestThatJson.ESpec.Matchers.HaveOnlyJsonProperties
 
+  alias TestThatJson.ESpec.Matchers.HaveJsonPath
+
   def be_json_eql(json), do: {BeJsonEql, json}
 
   def have_json_keys(value),      do: {HaveJsonKeys,     value}
@@ -20,4 +22,6 @@ defmodule TestThatJson.ESpec.Matchers do
 
   def have_json_properties(value),      do: {HaveJsonProperties,     value}
   def have_only_json_properties(value), do: {HaveOnlyJsonProperties, value}
+
+  def have_json_path(value), do: {HaveJsonPath, value}
 end
