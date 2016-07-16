@@ -2,11 +2,16 @@ defmodule TestThatJson.Generation do
   alias TestThatJson.Normalization
 
   def generate(value) do
-    JSX.encode(value)
+    case JSX.encode(value) do
+      {:error, _} -> {:error, {TestThatJson.JsonEncodingError, [value]}}
+      value       -> value
+    end
   end
 
   def generate!(value) do
     JSX.encode!(value)
+  rescue
+    ArgumentError -> raise TestThatJson.JsonEncodingError
   end
 
   def generate_prettified(value) do
