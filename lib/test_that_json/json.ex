@@ -156,8 +156,8 @@ defmodule TestThatJson.Json do
 
 
   defp process(subject) do
-    normalized_subject = normalize(subject)
-    scrub(normalized_subject)
+    parsed_subject = parse(subject)
+    scrub(parsed_subject)
   end
   defp process(subject, value) do
     processed_subject = process(subject)
@@ -166,23 +166,23 @@ defmodule TestThatJson.Json do
   end
 
   defp process_for_values(subject, value) do
-    normalized_subject = normalize(subject)
-    normalized_value   = normalize_for_values(value)
+    parsed_subject = parse(subject)
+    parsed_value   = parse_for_values(value)
 
-    scrubbed_subject = scrub(normalized_subject)
-    scrubbed_value   = scrub(normalized_value)
+    scrubbed_subject = scrub(parsed_subject)
+    scrubbed_value   = scrub(parsed_value)
 
     {scrubbed_subject, scrubbed_value}
   end
 
-  defp normalize(value) do
+  defp parse(value) do
     case Parsing.parse(value) do
       {:ok, parsed_value} -> parsed_value
       {:error, _}         -> value
     end
   end
 
-  defp normalize_for_values(value) when is_binary(value) do
+  defp parse_for_values(value) when is_binary(value) do
     case Parsing.parse(value) do
       {:ok, parsed_value} ->
         case parsed_value do
@@ -192,7 +192,7 @@ defmodule TestThatJson.Json do
       {:error, _} -> value
     end
   end
-  defp normalize_for_values(value), do: normalize(value)
+  defp parse_for_values(value), do: parse(value)
 
   defp scrub(value), do: Exclusion.exclude_keys(value)
 end
