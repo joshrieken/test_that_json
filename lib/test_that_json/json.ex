@@ -1,7 +1,7 @@
 defmodule TestThatJson.Json do
-  import TestThatJson.Exclusion
-  import TestThatJson.Parsing
-  import TestThatJson.Pathing
+  alias TestThatJson.Exclusion
+  alias TestThatJson.Parsing
+  alias TestThatJson.Pathing
 
   def has_keys?(subject, value) do
     {processed_subject, processed_value} = process(subject, value)
@@ -37,6 +37,10 @@ defmodule TestThatJson.Json do
     processed_subject = process(subject)
     do_has_path?(processed_subject, path)
   end
+
+
+
+
 
 
   # PRIVATE ##################################################
@@ -139,7 +143,7 @@ defmodule TestThatJson.Json do
   end
 
   defp do_has_path?(subject, path) when is_binary(path) do
-    value_at_path(subject, path)
+    Pathing.value_at_path(subject, path)
     true
   rescue
     _ in TestThatJson.PathNotFoundError -> false
@@ -172,14 +176,14 @@ defmodule TestThatJson.Json do
   end
 
   defp normalize(value) do
-    case parse(value) do
+    case Parsing.parse(value) do
       {:ok, parsed_value} -> parsed_value
       {:error, _}         -> value
     end
   end
 
   defp normalize_for_values(value) when is_binary(value) do
-    case parse(value) do
+    case Parsing.parse(value) do
       {:ok, parsed_value} ->
         case parsed_value do
           parsed_value when is_list(parsed_value) -> [parsed_value]
@@ -190,5 +194,5 @@ defmodule TestThatJson.Json do
   end
   defp normalize_for_values(value), do: normalize(value)
 
-  defp scrub(value), do: exclude_keys(value)
+  defp scrub(value), do: Exclusion.exclude_keys(value)
 end
