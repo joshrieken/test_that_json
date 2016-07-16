@@ -5,8 +5,9 @@ defmodule TestThatJson.ESpec.Matchers.HaveJsonPath do
 
   defp match(subject, path) do
     case Json.has_path?(subject, path) do
-      {:error, {module, _args, message}} -> raise module, message
-      result                             -> {result, result}
+      {:error, {module, _values, message}} -> raise module, message: message
+      {:error, {module, values}}           -> raise module, value: List.first(values)
+      result                               -> {result, result}
     end
   end
 

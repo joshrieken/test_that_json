@@ -5,8 +5,9 @@ defmodule TestThatJson.ESpec.Matchers.HaveJsonKeys do
 
   defp match(subject, value) do
     case Json.has_keys?(subject, value) do
-      {:error, {module, _args, message}} -> raise module, message
-      result                             -> {result, result}
+      {:error, {module, _values, message}} -> raise module, message: message
+      {:error, {module, values}}           -> raise module, value: List.first(values)
+      result                               -> {result, result}
     end
   end
 
