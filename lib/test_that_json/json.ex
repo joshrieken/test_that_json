@@ -54,13 +54,13 @@ defmodule TestThatJson.Json do
     Enum.member?(keys, string_value)
   end
   defp do_has_keys?(subject_map, invalid_value) when is_map(subject_map) do
-    {:error, ArgumentError, [invalid_value], "Value must be a list or a String.t"}
+    {:error, {ArgumentError, [invalid_value], "Value must be a list or a String.t"}}
   end
   defp do_has_keys?(invalid_subject, value) when is_list(value) or is_binary(value) do
-    {:error, ArgumentError, [invalid_subject], "Subject must be a map"}
+    {:error, {ArgumentError, [invalid_subject], "Subject must be a map"}}
   end
   defp do_has_keys?(invalid_subject, invalid_value) do
-    {:error, ArgumentError, [invalid_subject, invalid_value], "Subject must be a map and value must be a list or a String.t"}
+    {:error, {ArgumentError, [invalid_subject, invalid_value], "Subject must be a map and value must be a list or a String.t"}}
   end
 
   defp do_has_only_keys?(subject_map, list_value) when is_map(subject_map) and is_list(list_value) do
@@ -74,13 +74,13 @@ defmodule TestThatJson.Json do
     length(keys) == 1 && List.first(keys) == value
   end
   defp do_has_only_keys?(subject_map, invalid_value) when is_map(subject_map) do
-    {:error, ArgumentError, [invalid_value], "Value must be a list or a String.t"}
+    {:error, {ArgumentError, [invalid_value], "Value must be a list or a String.t"}}
   end
   defp do_has_only_keys?(invalid_subject, value) when is_list(value) or is_binary(value) do
-    {:error, ArgumentError, [invalid_subject], "Subject must be a map"}
+    {:error, {ArgumentError, [invalid_subject], "Subject must be a map"}}
   end
   defp do_has_only_keys?(invalid_subject, invalid_value) do
-    {:error, ArgumentError, [invalid_subject, invalid_value], "Subject must be a map and value must be a list or a String.t"}
+    {:error, {ArgumentError, [invalid_subject, invalid_value], "Subject must be a map and value must be a list or a String.t"}}
   end
 
   defp do_has_values?(map_subject, list_value) when is_map(map_subject) and is_list(list_value) do
@@ -126,7 +126,7 @@ defmodule TestThatJson.Json do
     Enum.all?(Map.keys(other_map), fn(key) -> Map.get(subject_map, key) == Map.get(other_map, key) end)
   end
   defp do_has_properties?(invalid_subject, invalid_value) do
-    {:error, ArgumentError, [invalid_subject, invalid_value], "Arguments must be maps"}
+    {:error, {ArgumentError, [invalid_subject, invalid_value], "Arguments must be maps"}}
   end
 
   defp do_has_only_properties?(subject_map, other_map) when is_map(subject_map) and is_map(other_map) do
@@ -139,7 +139,7 @@ defmodule TestThatJson.Json do
     end
   end
   defp do_has_only_properties?(invalid_subject, invalid_value) do
-    {:error, ArgumentError, [invalid_subject, invalid_value], "Arguments must be maps"}
+    {:error, {ArgumentError, [invalid_subject, invalid_value], "Arguments must be maps"}}
   end
 
   defp do_has_path?(subject, path) when is_binary(path) do

@@ -5,8 +5,8 @@ defmodule TestThatJson.ESpec.Matchers.HaveOnlyJsonProperties do
 
   defp match(subject, value) do
     case Json.has_only_properties?(subject, value) do
-      {:error, module, _args, message} -> raise module, message
-      result                           -> {result, result}
+      {:error, {module, _args, message}} -> raise module, message
+      result                             -> {result, result}
     end
   end
 

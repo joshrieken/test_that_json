@@ -5,8 +5,8 @@ defmodule TestThatJson.ESpec.Matchers.HaveOnlyJsonKeys do
 
   defp match(subject, value) do
     case Json.has_only_keys?(subject, value) do
-      {:error, module, _args, message} -> raise module, message
-      result                           -> {result, result}
+      {:error, {module, _args, message}} -> raise module, message
+      result                             -> {result, result}
     end
   end
 
