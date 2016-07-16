@@ -156,7 +156,7 @@ defmodule TestThatJson.Json do
     Pathing.value_at_path(subject, path)
     true
   rescue
-    _ in TestThatJson.PathNotFoundError -> false
+    TestThatJson.PathNotFoundError -> false
   end
 
 
