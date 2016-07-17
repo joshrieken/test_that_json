@@ -34,7 +34,7 @@ defmodule TestThatJson.Mixfile do
       maintainers: ["Joshua Rieken"],
       licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/facto/test_that_json"},
-      files: ~w(mix.exs README.md CHANGELOG.md lib),
+      files: ~w(mix.exs README.md CHANGELOG.md LICENSE.md lib),
     ]
   end
 

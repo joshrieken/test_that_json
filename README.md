@@ -68,3 +68,7 @@ Thanks to the creators and maintainers of the [Ruby json_spec](https://github.co
 ### Using ESpec
 
 Make sure espec is in your `mix.exs` as well.
+
+## License
+
+See the [LICENSE](LICENSE.md) file for license rights and limitations (MIT).
