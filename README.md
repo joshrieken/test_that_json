@@ -36,6 +36,11 @@ Assertions and helpers for a better JSON testing experience in Elixir.
 - [ ] Assertions can optionally take a path
 
 
+## ESpec
+
+See [test_that_json_espec](https://github.com/facto/test_that_json_espec) for ESpec matchers.
+
+
 ## Configuration
 
 ### Key Exclusion
