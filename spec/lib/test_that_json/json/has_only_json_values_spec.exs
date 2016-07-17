@@ -1,9 +1,7 @@
-defmodule TestThatJson.ESpec.Matchers.HaveOnlyJsonValuesSpec do
+defmodule TestThatJson.Assertions.HaveOnlyJsonValuesSpec do
   use ESpec
 
-  import TestThatJson.ESpec.Matchers, only: [have_only_json_values: 1]
-
-  subject do: json
+  import TestThatJson.Assertions, only: [has_only_json_values: 2]
 
   context "when the subject is a JSON object" do
     context "when the value is a map" do
@@ -17,8 +15,8 @@ defmodule TestThatJson.ESpec.Matchers.HaveOnlyJsonValuesSpec do
         """
       end
 
-      it do: should have_only_json_values(%{"nested" => "object y'all"})
-      it do: should_not have_only_json_values(%{"missing" => "object"})
+      it do: expect has_only_json_values(json, %{"nested" => "object y'all"}) |> to(be_true)
+      it do: expect has_only_json_values(json, %{"missing" => "object"}) |> to(be_false)
     end
 
     context "when the value is a list" do
@@ -35,15 +33,15 @@ defmodule TestThatJson.ESpec.Matchers.HaveOnlyJsonValuesSpec do
       end
 
       context "when all provided values are present and exhaustive" do
-        it do: should have_only_json_values(["object", "key with value", %{"nested" => "object y'all"}])
+        it do: expect has_only_json_values(json, ["object", "key with value", %{"nested" => "object y'all"}]) |> to(be_true)
       end
 
       context "when more than the provided values are present" do
-        it do: should_not have_only_json_values(["object"])
+        it do: expect has_only_json_values(json, ["object"]) |> to(be_false)
       end
 
       context "when fewer than the provided values are present" do
-        it do: should_not have_only_json_values(["object", "key with value", "yet_another", %{"nested" => "object y'all"}])
+        it do: expect has_only_json_values(json, ["object", "key with value", "yet_another", %{"nested" => "object y'all"}]) |> to(be_false)
       end
     end
 
@@ -57,7 +55,7 @@ defmodule TestThatJson.ESpec.Matchers.HaveOnlyJsonValuesSpec do
           """
         end
 
-        it do: should have_only_json_values("object")
+        it do: expect has_only_json_values(json, "object") |> to(be_true)
       end
 
       context "when there is more than one string value" do
@@ -70,8 +68,8 @@ defmodule TestThatJson.ESpec.Matchers.HaveOnlyJsonValuesSpec do
           """
         end
 
-        it do: should_not have_only_json_values("property")
-        it do: should_not have_only_json_values("another property")
+        it do: expect has_only_json_values(json, "property") |> to(be_false)
+        it do: expect has_only_json_values(json, "another property") |> to(be_false)
       end
     end
   end
@@ -94,33 +92,33 @@ defmodule TestThatJson.ESpec.Matchers.HaveOnlyJsonValuesSpec do
         """
       end
 
-      it do: should have_only_json_values([
+      it do: expect has_only_json_values(json, [
         %{"some" => "object", "another" => "key with value"},
         %{"another" => "object"},
         ["a list with a string"],
         "some string",
-      ])
+      ]) |> to(be_true)
 
-      it do: should_not have_only_json_values([
+      it do: expect has_only_json_values(json, [
         %{"another" => "object"},
         %{"some" => "object", "another" => "key with value"},
         ["a list with a string"],
         "some string",
-      ])
+      ]) |> to(be_false)
 
-      it do: should_not have_only_json_values([
+      it do: expect has_only_json_values(json, [
         %{"another" => "object"},
         ["a list with a string"],
         "some string",
-      ])
+      ]) |> to(be_false)
 
-      it do: should_not have_only_json_values([
+      it do: expect has_only_json_values(json, [
         %{"some" => "object", "another" => "key with value"},
         %{"another" => "object"},
         ["a list with a string"],
         "some string",
         "another string",
-      ])
+      ]) |> to(be_false)
     end
 
     context "when the value is a map" do
@@ -135,8 +133,8 @@ defmodule TestThatJson.ESpec.Matchers.HaveOnlyJsonValuesSpec do
         """
       end
 
-      it do: should have_only_json_values(%{"some" => "object", "another" => "key with value"})
-      it do: should_not have_only_json_values(%{"some_other" => "object"})
+      it do: expect has_only_json_values(json, %{"some" => "object", "another" => "key with value"}) |> to(be_true)
+      it do: expect has_only_json_values(json, %{"some_other" => "object"}) |> to(be_false)
     end
 
     context "when the value is a string" do
@@ -149,8 +147,8 @@ defmodule TestThatJson.ESpec.Matchers.HaveOnlyJsonValuesSpec do
           """
         end
 
-        it do: should have_only_json_values("[\"a list with a string\"]")
-        it do: should_not have_only_json_values("\"a list with a string\"")
+        it do: expect has_only_json_values(json, "[\"a list with a string\"]") |> to(be_true)
+        it do: expect has_only_json_values(json, "\"a list with a string\"") |> to(be_false)
       end
 
       context "when the string is not JSON" do
@@ -162,8 +160,8 @@ defmodule TestThatJson.ESpec.Matchers.HaveOnlyJsonValuesSpec do
           """
         end
 
-        it do: should have_only_json_values("a list with a string")
-        it do: should_not have_only_json_values("some other string")
+        it do: expect has_only_json_values(json, "a list with a string") |> to(be_true)
+        it do: expect has_only_json_values(json, "some other string") |> to(be_false)
       end
     end
   end
@@ -172,13 +170,13 @@ defmodule TestThatJson.ESpec.Matchers.HaveOnlyJsonValuesSpec do
     let :json, do: "\"string\""
 
     context "when the value is a JSON string" do
-      it do: should have_only_json_values("\"string\"")
-      it do: should_not have_only_json_values("\"another string\"")
+      it do: expect has_only_json_values(json, "\"string\"") |> to(be_true)
+      it do: expect has_only_json_values(json, "\"another string\"") |> to(be_false)
     end
 
     context "when the value is a string but not JSON" do
-      it do: should have_only_json_values("string")
-      it do: should_not have_only_json_values("another string")
+      it do: expect has_only_json_values(json, "string") |> to(be_true)
+      it do: expect has_only_json_values(json, "another string") |> to(be_false)
     end
   end
 end
