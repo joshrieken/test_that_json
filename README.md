@@ -1,25 +1,23 @@
 # Test That JSON!
 
-JSON helpers and matchers for ExUnit and [ESpec](https://github.com/antonmi/espec).
+Assertions and helpers for a better JSON testing experience in Elixir.
 
-## ExUnit
 
-## ESpec
+## Assertions
 
-Matchers:
+- [x] `is_json_eql`
+- [x] `has_json_keys`
+- [x] `has_only_json_keys`
+- [x] `has_json_values`
+- [x] `has_only_json_values`
+- [x] `has_json_properties`
+- [x] `has_only_json_properties`
+- [x] `has_json_path`
+- [ ] `has_json_type`
+- [ ] `has_json_size`
 
-- [x] `be_json_eql`
-- [x] `have_json_keys`
-- [x] `have_only_json_keys`
-- [x] `have_json_values`
-- [x] `have_only_json_values`
-- [x] `have_json_properties`
-- [x] `have_only_json_properties`
-- [x] `have_json_path`
-- [ ] `have_json_type`
-- [ ] `have_json_size`
 
-Helpers:
+## Helpers
 
 - [x] `parse_json`
 - [x] `parse_json!`
@@ -32,9 +30,29 @@ Helpers:
 - [x] `load_json`
 - [x] `load_json!`
 
+
+## Additional Functionality
+
+- [ ] Assertions can optionally take a path
+
+
+## Configuration
+
+### Key Exclusion
+
+By default, to avoid needing to know the values of these ahead of time, the following keys are ignored for all JSON objects: `id`, `inserted_at`, and `updated_at`.
+
+This can be reconfigured as follows:
+
+``` elixir
+config :test_that_json,
+  excluded_keys: ~w(id inserted_at updated_at some other keys)
+```
+
+
 ## Paths
 
-These are simple strings of "/" separated hash keys and array indexes. For instance, with the following JSON:
+These are simple strings of "/"-separated object keys and array indexes passed to `has_json_path`. For instance, with the following JSON:
 
 ``` json
 {
@@ -51,23 +69,30 @@ These are simple strings of "/" separated hash keys and array indexes. For insta
 
 We could access the first friend's first name with the path "friends/0/first_name".
 
+
 ## Thanks
 
 Thanks to the creators and maintainers of the [Ruby json_spec](https://github.com/collectiveidea/json_spec) project for heavy inspiration.
 
+
 ## Installation
 
-1. Add `test_that_json` to your list of dependencies in `mix.exs`:
+1. Add `test_that_json` as a test-only dependency in `mix.exs`:
 
   ```elixir
   def deps do
-    [{:test_that_json, "~> 0.1.0", only: :test}]
+    [{:test_that_json, "~> 0.5.0", only: :test}]
   end
   ```
 
-### Using ESpec
 
-Make sure espec is in your `mix.exs` as well.
+## Contributing
+
+1. Before opening a pull request, please open an issue first.
+2. Do the usual fork/add/fix/run tests dance, or whatever tickles your fancy. Tests are highly encouraged.
+3. Open a PR.
+4. Treat yourself. You deserve it.
+
 
 ## License
 
