@@ -40,7 +40,7 @@ defmodule TestThatJson.Mixfile do
 
   defp description do
     """
-    JSON helpers for your Elixir testing needs
+    JSON assertions and helpers for your Elixir testing needs
     """
   end
 
