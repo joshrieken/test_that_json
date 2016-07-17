@@ -1,14 +1,11 @@
 defmodule TestThatJson.ESpec.Matchers.BeJsonEql do
   use ESpec.Assertions.Interface
 
-  alias TestThatJson.Json
+  alias TestThatJson.Assertions
 
   defp match(subject, value) when is_binary(value) do
-    case Json.equals?(subject, value) do
-      {:error, {module, _values, message}} -> raise module, message: message
-      {:error, {module, values}}           -> raise module, value: List.first(values)
-      result                               -> {result, result}
-    end
+    result = Assertions.is_json_eql(subject, value)
+    {result, result}
   end
 
   defp success_message(subject, value, _result, positive) do

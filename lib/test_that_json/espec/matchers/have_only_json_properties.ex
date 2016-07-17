@@ -1,14 +1,11 @@
 defmodule TestThatJson.ESpec.Matchers.HaveOnlyJsonProperties do
   use ESpec.Assertions.Interface
 
-  alias TestThatJson.Json
+  alias TestThatJson.Assertions
 
   defp match(subject, value) do
-    case Json.has_only_properties?(subject, value) do
-      {:error, {module, _values, message}} -> raise module, message: message
-      {:error, {module, values}}           -> raise module, value: List.first(values)
-      result                               -> {result, result}
-    end
+    result = Assertions.has_only_json_properties(subject, value)
+    {result, result}
   end
 
   defp success_message(subject, value, _result, positive) do

@@ -1,14 +1,11 @@
 defmodule TestThatJson.ESpec.Matchers.HaveJsonPath do
   use ESpec.Assertions.Interface
 
-  alias TestThatJson.Json
+  alias TestThatJson.Assertions
 
   defp match(subject, path) do
-    case Json.has_path?(subject, path) do
-      {:error, {module, _values, message}} -> raise module, message: message
-      {:error, {module, values}}           -> raise module, value: List.first(values)
-      result                               -> {result, result}
-    end
+    result = Assertions.has_json_path(subject, path)
+    {result, result}
   end
 
   defp success_message(subject, value, _result, positive) do
