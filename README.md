@@ -111,8 +111,8 @@ We could access the first friend's first name with the path "friends/0/first_nam
 
 ## Related Projects
 
-- [jonasschmidt/ex_json_schema](https://github.com/jonasschmidt/ex_json_schema)
 - [DockYard/json_api_assert](https://github.com/DockYard/json_api_assert)
+- [jonasschmidt/ex_json_schema](https://github.com/jonasschmidt/ex_json_schema)
 
 
 ## Thanks
