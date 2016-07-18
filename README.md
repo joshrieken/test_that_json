@@ -5,7 +5,7 @@ Assertions and helpers for a better JSON testing experience in Elixir.
 
 ## Assertions
 
-- [x] `is_json_eql`
+- [x] `is_json_equal`
 - [x] `has_json_keys`
 - [x] `has_only_json_keys`
 - [x] `has_json_values`

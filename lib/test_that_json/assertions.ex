@@ -1,7 +1,7 @@
 defmodule TestThatJson.Assertions do
   alias TestThatJson.Json
 
-  def is_json_eql(subject, value) do
+  def is_json_equal(subject, value) do
     handle_result!(Json.equals?(subject, value))
   end
 
