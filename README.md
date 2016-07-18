@@ -87,6 +87,12 @@ Thanks to the creators and maintainers of the [Ruby json_spec](https://github.co
   ```
 
 
+## Chores
+
+- [x] Tests
+- [ ] Docs
+
+
 ## Contributing
 
 1. Before opening a pull request, please open an issue first.
