@@ -35,6 +35,7 @@ Using [ESpec](https://github.com/antonmi/espec)? Check out [test_that_json_espec
 ## Additional Functionality
 
 - [ ] Assertions can optionally take a path
+- [ ] Assertions can be composed together w/ the pipe |> operator
 
 
 ## Example
