@@ -2,6 +2,7 @@
 
 Assertions and helpers for a better JSON testing experience in Elixir.
 
+Using [ESpec](https://github.com/antonmi/espec)? Check out [test_that_json_espec](https://github.com/facto/test_that_json_espec).
 
 ## Assertions
 
@@ -34,11 +35,6 @@ Assertions and helpers for a better JSON testing experience in Elixir.
 ## Additional Functionality
 
 - [ ] Assertions can optionally take a path
-
-
-## ESpec
-
-See [test_that_json_espec](https://github.com/facto/test_that_json_espec) for ESpec matchers.
 
 
 ## Configuration
