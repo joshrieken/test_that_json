@@ -6,30 +6,30 @@ Using [ESpec](https://github.com/antonmi/espec)? Check out [test_that_json_espec
 
 ## Assertions
 
-- [x] `is_json_equal`
-- [x] `has_json_keys`
-- [x] `has_only_json_keys`
-- [x] `has_json_values`
-- [x] `has_only_json_values`
-- [x] `has_json_properties`
-- [x] `has_only_json_properties`
-- [x] `has_json_path`
+- [X] `is_json_equal`
+- [X] `has_json_keys`
+- [X] `has_only_json_keys`
+- [X] `has_json_values`
+- [X] `has_only_json_values`
+- [X] `has_json_properties`
+- [X] `has_only_json_properties`
+- [X] `has_json_path`
 - [ ] `has_json_type`
 - [ ] `has_json_size`
 
 
 ## Helpers
 
-- [x] `parse_json`
-- [x] `parse_json!`
-- [x] `to_json`
-- [x] `to_json!`
-- [x] `prettify_json`
-- [x] `prettify_json!`
-- [x] `to_prettified_json`
-- [x] `to_prettified_json!`
-- [x] `load_json`
-- [x] `load_json!`
+- [X] `parse_json`
+- [X] `parse_json!`
+- [X] `to_json`
+- [X] `to_json!`
+- [X] `prettify_json`
+- [X] `prettify_json!`
+- [X] `to_prettified_json`
+- [X] `to_prettified_json!`
+- [X] `load_json`
+- [X] `load_json!`
 
 
 ## Additional Functionality
@@ -105,8 +105,9 @@ We could access the first friend's first name with the path "friends/0/first_nam
 
 ## Project Chores
 
-- [x] Tests
-- [ ] Docs
+- [X] Tests
+- [X] Assertion docs
+- [ ] Helper docs
 
 
 ## Related Projects
