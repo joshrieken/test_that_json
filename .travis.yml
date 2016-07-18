@@ -9,6 +9,7 @@ sudo: false # to use faster container based build environment
 script:
   - mix deps.get
   - mix espec
+  - mix test
 after_script:
   - MIX_ENV=docs mix deps.get
   - MIX_ENV=docs mix inch.report
