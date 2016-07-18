@@ -2,6 +2,9 @@
 
 Assertions and helpers for a better JSON testing experience in Elixir.
 
+[![Build Status](https://travis-ci.org/facto/test_that_json.svg?branch=master)](https://travis-ci.org/facto/test_that_json)
+[![Inline docs](http://inch-ci.org/github/facto/test_that_json.svg)](http://inch-ci.org/github/facto/test_that_json)
+
 Using [ESpec](https://github.com/antonmi/espec)? Check out [test_that_json_espec](https://github.com/facto/test_that_json_espec).
 
 ## Assertions
