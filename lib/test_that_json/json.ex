@@ -3,41 +3,90 @@ defmodule TestThatJson.Json do
   alias TestThatJson.Parsing
   alias TestThatJson.Pathing
 
+  @type json_object :: String.t | map
+  @type json_array :: String.t | list
+  @type json_string :: String.t
+  @type json_number :: String.t | number
+  @type json_value :: json_object | json_array | json_string | json_number
+
+  @doc """
+  Receives a subject and a value and returns whether they are equal.
+  """
+  @spec equals?(json_value, json_value) :: boolean
   def equals?(subject, value) do
     {processed_subject, processed_value} = process(subject, value)
     do_equals?(processed_subject, processed_value)
   end
 
+  @doc """
+  Receives a subject and a value and returns whether the subject has all keys
+  specified by the value.
+  """
+  @spec has_keys?(json_object, json_array | json_string) :: boolean
   def has_keys?(subject, value) do
     {processed_subject, processed_value} = process(subject, value)
     do_has_keys?(processed_subject, processed_value)
   end
 
+  @doc """
+  Receives a subject and a value and returns whether the subject contains
+  only the keys specified by the value.
+  """
+  @spec has_only_keys?(json_object, json_array | json_string) :: boolean
   def has_only_keys?(subject, value) do
     {processed_subject, processed_value} = process(subject, value)
     do_has_only_keys?(processed_subject, processed_value)
   end
 
+  @doc """
+  Receives a subject and a value and returns whether the subject contains the
+  values specified by the value.
+
+  If the value is a list, returns whether all values in the list are in the subject.
+
+  If the value is a JSON array as a `String.t`, it is not treated the same as
+  a list. Instead, returns whether that list itself is one of the values in the subject.
+  """
+  @spec has_values?(json_value, json_value) :: boolean
   def has_values?(subject, value) do
     {processed_subject, processed_value} = process_for_values(subject, value)
     do_has_values?(processed_subject, processed_value)
   end
 
+  @doc """
+  Receives a subject and a value and returns whether the subject contains only
+  the values specified by the value.
+  """
+  @spec has_only_values?(json_value, json_value) :: boolean
   def has_only_values?(subject, value) do
     {processed_subject, processed_value} = process_for_values(subject, value)
     do_has_only_values?(processed_subject, processed_value)
   end
 
+  @doc """
+  Receives a subject and a value and returns whether the subject contains the
+  properties (or key value pairs) specified by the value.
+  """
+  @spec has_properties?(json_object, json_object) :: boolean
   def has_properties?(subject, value) do
     {processed_subject, processed_value} = process(subject, value)
     do_has_properties?(processed_subject, processed_value)
   end
 
+  @doc """
+  Receives a subject and a value and returns whether the subject contains only
+  the properties (or key value pairs) specified by the value.
+  """
+  @spec has_only_properties?(json_object, json_object) :: boolean
   def has_only_properties?(subject, value) do
     {processed_subject, processed_value} = process(subject, value)
     do_has_only_properties?(processed_subject, processed_value)
   end
 
+  @doc """
+  Receives a subject and a path and returns whether the path exists within the subject.
+  """
+  @spec has_path?(json_object | json_array, String.t) :: boolean
   def has_path?(subject, path) do
     processed_subject = process(subject)
     do_has_path?(processed_subject, path)
