@@ -4,43 +4,42 @@ defmodule TestThatJson.Json do
   alias TestThatJson.Pathing
 
   def equals?(subject, value) do
-    with {:ok, processed_subject} <- hard_process(subject),
-         {:ok, processed_value}   <- hard_process(value),
-         do: do_equals?(processed_subject, processed_value)
+    {processed_subject, processed_value} = process(subject, value)
+    do_equals?(processed_subject, processed_value)
   end
 
   def has_keys?(subject, value) do
-    {processed_subject, processed_value} = soft_process(subject, value)
+    {processed_subject, processed_value} = process(subject, value)
     do_has_keys?(processed_subject, processed_value)
   end
 
   def has_only_keys?(subject, value) do
-    {processed_subject, processed_value} = soft_process(subject, value)
+    {processed_subject, processed_value} = process(subject, value)
     do_has_only_keys?(processed_subject, processed_value)
   end
 
   def has_values?(subject, value) do
-    {processed_subject, processed_value} = soft_process_for_values(subject, value)
+    {processed_subject, processed_value} = process_for_values(subject, value)
     do_has_values?(processed_subject, processed_value)
   end
 
   def has_only_values?(subject, value) do
-    {processed_subject, processed_value} = soft_process_for_values(subject, value)
+    {processed_subject, processed_value} = process_for_values(subject, value)
     do_has_only_values?(processed_subject, processed_value)
   end
 
   def has_properties?(subject, value) do
-    {processed_subject, processed_value} = soft_process(subject, value)
+    {processed_subject, processed_value} = process(subject, value)
     do_has_properties?(processed_subject, processed_value)
   end
 
   def has_only_properties?(subject, value) do
-    {processed_subject, processed_value} = soft_process(subject, value)
+    {processed_subject, processed_value} = process(subject, value)
     do_has_only_properties?(processed_subject, processed_value)
   end
 
   def has_path?(subject, path) do
-    processed_subject = soft_process(subject)
+    processed_subject = process(subject)
     do_has_path?(processed_subject, path)
   end
 
@@ -163,26 +162,19 @@ defmodule TestThatJson.Json do
 
 
 
-  defp hard_process(subject) do
-    case hard_parse(subject) do
-      {:ok, parsed_subject} -> {:ok, scrub(parsed_subject)}
-      error                 -> error
-    end
-  end
-
-  defp soft_process(subject) do
-    parsed_subject = soft_parse(subject)
+  defp process(subject) do
+    parsed_subject = parse(subject)
     scrub(parsed_subject)
   end
-  defp soft_process(subject, value) do
-    processed_subject = soft_process(subject)
-    processed_value   = soft_process(value)
+  defp process(subject, value) do
+    processed_subject = process(subject)
+    processed_value   = process(value)
     {processed_subject, processed_value}
   end
 
-  defp soft_process_for_values(subject, value) do
-    parsed_subject = soft_parse(subject)
-    parsed_value   = soft_parse_for_values(value)
+  defp process_for_values(subject, value) do
+    parsed_subject = parse(subject)
+    parsed_value   = parse_for_values(value)
 
     scrubbed_subject = scrub(parsed_subject)
     scrubbed_value   = scrub(parsed_value)
@@ -190,18 +182,14 @@ defmodule TestThatJson.Json do
     {scrubbed_subject, scrubbed_value}
   end
 
-  defp hard_parse(value) do
-    Parsing.parse(value)
-  end
-
-  defp soft_parse(value) do
+  defp parse(value) do
     case Parsing.parse(value) do
       {:ok, parsed_value} -> parsed_value
       {:error, _}         -> value
     end
   end
 
-  defp soft_parse_for_values(value) when is_binary(value) do
+  defp parse_for_values(value) when is_binary(value) do
     case Parsing.parse(value) do
       {:ok, parsed_value} ->
         case parsed_value do
@@ -211,7 +199,7 @@ defmodule TestThatJson.Json do
       {:error, _} -> value
     end
   end
-  defp soft_parse_for_values(value), do: soft_parse(value)
+  defp parse_for_values(value), do: parse(value)
 
   defp scrub(value), do: Exclusion.exclude_keys(value)
 end
