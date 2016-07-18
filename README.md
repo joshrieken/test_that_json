@@ -37,6 +37,37 @@ Using [ESpec](https://github.com/antonmi/espec)? Check out [test_that_json_espec
 - [ ] Assertions can optionally take a path
 
 
+## Example
+
+```elixir
+defmodule MyProject.ExampleTest
+  use ExUnit.Case
+
+  import TestThatJson.Assertions
+  import TestThatJson.Helpers
+
+  test "verifying JSON key presence" do
+    json = load_json("test/support/json/valid.json") # example helper use
+
+    assert has_json_keys(["key1", "key2"])
+  end
+end
+```
+
+Test That JSON! has extensive tests, but they're mostly written as [ESpec](https://github.com/antonmi/espec) specs because I like that style for complex testing. See the `test` directory for some basic happy-path tests, and the `spec` directory for detailed use cases.
+
+
+## Installation
+
+1. Add `test_that_json` as a test-only dependency in `mix.exs`:
+
+  ```elixir
+  def deps do
+    [{:test_that_json, "~> 0.5.0", only: :test}]
+  end
+  ```
+
+
 ## Configuration
 
 ### Key Exclusion
@@ -71,26 +102,21 @@ These are simple strings of "/"-separated object keys and array indexes passed t
 We could access the first friend's first name with the path "friends/0/first_name".
 
 
-## Thanks
-
-Thanks to the creators and maintainers of the [Ruby json_spec](https://github.com/collectiveidea/json_spec) project for heavy inspiration.
-
-
-## Installation
-
-1. Add `test_that_json` as a test-only dependency in `mix.exs`:
-
-  ```elixir
-  def deps do
-    [{:test_that_json, "~> 0.5.0", only: :test}]
-  end
-  ```
-
-
-## Chores
+## Project Chores
 
 - [x] Tests
 - [ ] Docs
+
+
+## Related Projects
+
+- [jonasschmidt/ex_json_schema](https://github.com/jonasschmidt/ex_json_schema)
+- [DockYard/json_api_assert](https://github.com/DockYard/json_api_assert)
+
+
+## Thanks
+
+Thanks to the creators and maintainers of the [Ruby json_spec](https://github.com/collectiveidea/json_spec) project for heavy inspiration.
 
 
 ## Contributing
