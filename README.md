@@ -67,7 +67,9 @@ Test That JSON! has extensive tests, but they're mostly written as [ESpec](https
 
   ```elixir
   def deps do
-    [{:test_that_json, "~> 0.5.0", only: :test}]
+    [
+      {:test_that_json, "~> 0.1.0", only: :test},
+    ]
   end
   ```
 
