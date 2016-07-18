@@ -11,7 +11,7 @@ defmodule TestThatJson.Mixfile do
       deps:            deps(),
       description:     description(),
       package:         package(),
-      docs:            [extras: ["README.md", "CHANGELOG.md"]],
+      docs:            [extras: ["README.md", "CHANGELOG.md", "LICENSE.md"]],
       preferred_cli_env: [
         espec:        :test,
       ],
