@@ -7,6 +7,14 @@ Assertions and helpers for a better JSON testing experience in Elixir.
 
 Using [ESpec](https://github.com/antonmi/espec)? Check out [test_that_json_espec](https://github.com/facto/test_that_json_espec).
 
+
+## Docs
+
+[All Docs](https://hexdocs.pm/test_that_json/api-reference.html)
+
+**Assertions:** See the [`Json`](https://hexdocs.pm/test_that_json/TestThatJson.Json.html) module.
+
+
 ## Assertions
 
 - [X] `is_json_equal`
