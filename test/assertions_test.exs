@@ -85,5 +85,27 @@ defmodule TestThatJson.AssertionsTest do
 
     assert has_json_path(json, "key1")
   end
+
+  test "has_json_type" do
+    json = """
+    {
+      "key1": "value",
+      "key2": "data"
+    }
+    """
+
+    assert has_json_type(json, :object)
+  end
+
+  test "has_json_size" do
+    json = """
+    {
+      "key1": "value",
+      "key2": "data"
+    }
+    """
+
+    assert has_json_size(json, 2)
+  end
 end
 
