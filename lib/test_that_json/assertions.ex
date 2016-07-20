@@ -33,6 +33,10 @@ defmodule TestThatJson.Assertions do
     handle_result!(Json.has_path?(subject, value))
   end
 
+  def has_json_type(subject, type) do
+    handle_result!(Json.has_type?(subject, type))
+  end
+
   # PRIVATE API ##############################################
 
   defp handle_result!(expr) do

@@ -92,6 +92,16 @@ defmodule TestThatJson.Json do
     do_has_path?(processed_subject, path)
   end
 
+  @doc """
+  Receives a subject and a JSON type as an atom and returns whether the subject is that type.
+
+  Valid types: `:object`, `:array`, `:string`, `:number`, `:integer`, `:float`, `:boolean`, `:null`.
+  """
+  @spec has_type?(json_value, atom) :: boolean
+  def has_type?(subject, type) do
+    processed_subject = process(subject)
+    do_has_type?(processed_subject, type)
+  end
 
 
 
@@ -205,6 +215,21 @@ defmodule TestThatJson.Json do
     true
   rescue
     TestThatJson.PathNotFoundError -> false
+  end
+
+  defp do_has_type?(subject, :object),  do: is_map(subject)
+  defp do_has_type?(subject, :array),   do: is_list(subject)
+  defp do_has_type?(subject, :string),  do: is_binary(subject)
+  defp do_has_type?(subject, :number),  do: is_number(subject)
+  defp do_has_type?(subject, :integer), do: is_integer(subject)
+  defp do_has_type?(subject, :float),   do: is_float(subject)
+  defp do_has_type?(subject, :boolean), do: is_boolean(subject)
+  defp do_has_type?(subject, :null),    do: is_nil(subject)
+  defp do_has_type?(_subject, unsupported_type) when is_atom(unsupported_type) do
+    {:error, {ArgumentError, [unsupported_type], "Unsupported type"}}
+  end
+  defp do_has_type?(_subject, invalid_type) do
+    {:error, {ArgumentError, [invalid_type], "Type must be an atom"}}
   end
 
 

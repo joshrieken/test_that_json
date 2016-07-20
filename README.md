@@ -25,7 +25,7 @@ Using [ESpec](https://github.com/antonmi/espec)? Check out [test_that_json_espec
 - [X] `has_json_properties`
 - [X] `has_only_json_properties`
 - [X] `has_json_path`
-- [ ] `has_json_type`
+- [X] `has_json_type`
 - [ ] `has_json_size`
 
 
