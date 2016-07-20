@@ -103,6 +103,14 @@ defmodule TestThatJson.Json do
     do_has_type?(processed_subject, type)
   end
 
+  @doc """
+  Receives a subject and an integer and returns with the subject has a size equal to the integer.
+  """
+  @spec has_size?(json_value, integer) :: boolean
+  def has_size?(subject, size) do
+    processed_subject = process(subject)
+    do_has_size?(processed_subject, size)
+  end
 
 
 
@@ -230,6 +238,16 @@ defmodule TestThatJson.Json do
   end
   defp do_has_type?(_subject, invalid_type) do
     {:error, {ArgumentError, [invalid_type], "Type must be an atom"}}
+  end
+
+  defp do_has_size?(subject, size) when is_map(subject) or is_list(subject) and is_integer(size) do
+    Enum.count(subject) == size
+  end
+  defp do_has_size?(subject, invalid_size) when is_map(subject) or is_list(subject) do
+    {:error, {ArgumentError, [invalid_size], "Size must be an integer"}}
+  end
+  defp do_has_size?(invalid_subject, _size) do
+    {:error, {ArgumentError, [invalid_subject], "Subject must be a map or a list"}}
   end
 
 

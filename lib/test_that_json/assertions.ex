@@ -37,6 +37,10 @@ defmodule TestThatJson.Assertions do
     handle_result!(Json.has_type?(subject, type))
   end
 
+  def has_json_size(subject, size) do
+    handle_result!(Json.has_size?(subject, size))
+  end
+
   # PRIVATE API ##############################################
 
   defp handle_result!(expr) do
