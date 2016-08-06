@@ -1,7 +1,7 @@
-defmodule TestThatJson.Assertions.HasJsonSizeSpec do
+defmodule TestThatJson.Helpers.HasJsonSizeSpec do
   use ESpec
 
-  import TestThatJson.Assertions, only: [has_json_size: 2]
+  import TestThatJson.Helpers, only: [has_json_size: 2]
 
   context "when the subject is a JSON object" do
     let :json do

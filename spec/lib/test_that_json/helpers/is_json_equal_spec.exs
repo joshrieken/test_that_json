@@ -1,7 +1,7 @@
-defmodule TestThatJson.Assertions.IsJsonEqualSpec do
+defmodule TestThatJson.Helpers.IsJsonEqualSpec do
   use ESpec
 
-  import TestThatJson.Assertions, only: [is_json_equal: 2]
+  import TestThatJson.Helpers, only: [is_json_equal: 2]
 
   context "when the subject is a JSON object" do
     let :json do

@@ -1,7 +1,7 @@
-defmodule TestThatJson.Assertions.HaveOnlyJsonValuesSpec do
+defmodule TestThatJson.Helpers.HaveOnlyJsonValuesSpec do
   use ESpec
 
-  import TestThatJson.Assertions, only: [has_only_json_values: 2]
+  import TestThatJson.Helpers, only: [has_only_json_values: 2]
 
   context "when the subject is a JSON object" do
     context "when the value is a map" do

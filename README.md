@@ -1,6 +1,6 @@
 # Test That JSON!
 
-Assertions and helpers for a better JSON testing experience in Elixir.
+Helpers for a better JSON testing experience in Elixir.
 
 [![Build Status](https://travis-ci.org/facto/test_that_json.svg?branch=master)](https://travis-ci.org/facto/test_that_json)
 [![Inline docs](http://inch-ci.org/github/facto/test_that_json.svg)](http://inch-ci.org/github/facto/test_that_json)
@@ -12,12 +12,13 @@ Using [ESpec](https://github.com/antonmi/espec)? Check out [test_that_json_espec
 
 [All Docs](https://hexdocs.pm/test_that_json/api-reference.html)
 
-**Assertions:** See the [`Json`](https://hexdocs.pm/test_that_json/TestThatJson.Json.html) module.
+For now, see the [`Json`](https://hexdocs.pm/test_that_json/TestThatJson.Json.html) module for docs for much of the API.
+
+This project has an extensive test suite, so see that for detailed usage.
 
 
-## Assertions
+## Helpers
 
-- [X] `is_json_equal`
 - [X] `has_json_keys`
 - [X] `has_only_json_keys`
 - [X] `has_json_values`
@@ -25,28 +26,25 @@ Using [ESpec](https://github.com/antonmi/espec)? Check out [test_that_json_espec
 - [X] `has_json_properties`
 - [X] `has_only_json_properties`
 - [X] `has_json_path`
-- [X] `has_json_type`
 - [X] `has_json_size`
-
-
-## Helpers
-
-- [X] `parse_json`
-- [X] `parse_json!`
-- [X] `to_json`
-- [X] `to_json!`
-- [X] `prettify_json`
-- [X] `prettify_json!`
-- [X] `to_prettified_json`
-- [X] `to_prettified_json!`
+- [X] `has_json_type`
+- [X] `is_json_equal`
 - [X] `load_json`
 - [X] `load_json!`
+- [X] `parse_json`
+- [X] `parse_json!`
+- [X] `prettify_json`
+- [X] `prettify_json!`
+- [X] `to_json`
+- [X] `to_json!`
+- [X] `to_prettified_json`
+- [X] `to_prettified_json!`
 
 
 ## Additional Functionality
 
-- [ ] Assertions can optionally take a path
-- [ ] Assertions can be composed together w/ the pipe |> operator
+- [ ] Helpers that return a boolean can optionally take a path
+- [ ] Helpers can be composed together w/ the pipe |> operator
 
 
 ## Example
@@ -55,7 +53,6 @@ Using [ESpec](https://github.com/antonmi/espec)? Check out [test_that_json_espec
 defmodule MyProject.ExampleTest
   use ExUnit.Case
 
-  import TestThatJson.Assertions
   import TestThatJson.Helpers
 
   test "verifying JSON key presence" do
@@ -119,8 +116,7 @@ We could access the first friend's first name with the path "friends/0/first_nam
 ## Project Chores
 
 - [X] Tests
-- [X] Assertion docs
-- [ ] Helper docs
+- [ ] Docs for entire helper API
 
 
 ## Related Projects

@@ -1,13 +1,7 @@
-defmodule TestThatJson.AssertionsTest do
+defmodule TestThatJson.HelpersTest do
   use ExUnit.Case, async: true
 
-  import TestThatJson.Assertions
-
-  test "is_json_equal" do
-    json = "[1,2,3]"
-
-    assert is_json_equal(json, json)
-  end
+  import TestThatJson.Helpers
 
   test "has_json_keys" do
     json = """
@@ -86,6 +80,17 @@ defmodule TestThatJson.AssertionsTest do
     assert has_json_path(json, "key1")
   end
 
+  test "has_json_size" do
+    json = """
+    {
+      "key1": "value",
+      "key2": "data"
+    }
+    """
+
+    assert has_json_size(json, 2)
+  end
+
   test "has_json_type" do
     json = """
     {
@@ -97,15 +102,10 @@ defmodule TestThatJson.AssertionsTest do
     assert has_json_type(json, :object)
   end
 
-  test "has_json_size" do
-    json = """
-    {
-      "key1": "value",
-      "key2": "data"
-    }
-    """
+  test "is_json_equal" do
+    json = "[1,2,3]"
 
-    assert has_json_size(json, 2)
+    assert is_json_equal(json, json)
   end
 end
 

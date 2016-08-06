@@ -1,7 +1,7 @@
-defmodule TestThatJson.Assertions.HasOnlyJsonKeysSpec do
+defmodule TestThatJson.Helpers.HasOnlyJsonKeysSpec do
   use ESpec
 
-  import TestThatJson.Assertions, only: [has_only_json_keys: 2]
+  import TestThatJson.Helpers, only: [has_only_json_keys: 2]
 
   context "when the subject is a JSON object" do
     let :json, do: "{\"some\": \"object\", \"another\": \"object with value\"}"

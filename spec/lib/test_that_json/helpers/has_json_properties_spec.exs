@@ -1,7 +1,7 @@
-defmodule TestThatJson.Assertions.HasJsonPropertiesSpec do
+defmodule TestThatJson.Helpers.HasJsonPropertiesSpec do
   use ESpec
 
-  import TestThatJson.Assertions, only: [has_json_properties: 2]
+  import TestThatJson.Helpers, only: [has_json_properties: 2]
 
   context "when the subject is a JSON object" do
     let :json do

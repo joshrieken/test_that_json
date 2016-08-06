@@ -1,7 +1,7 @@
-defmodule TestThatJson.Assertions.HasJsonPathSpec do
+defmodule TestThatJson.Helpers.HasJsonPathSpec do
   use ESpec
 
-  import TestThatJson.Assertions, only: [has_json_path: 2]
+  import TestThatJson.Helpers, only: [has_json_path: 2]
 
   context "when the subject is a JSON object" do
     context "when that object is shallow" do
