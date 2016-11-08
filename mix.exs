@@ -57,7 +57,7 @@ defmodule TestThatJson.Mixfile do
     [
       {:exjsx,   "~> 3.2.0"},
       {:ex_doc,  "~> 0.13.0",  only: :dev},
-      {:espec,   "~> 0.8.22",  only: :test},
+      {:espec,   "~> 1.0",     only: :test},
       {:inch_ex, only: :docs},
     ]
   end
