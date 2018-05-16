@@ -4,8 +4,8 @@ defmodule TestThatJson.Mixfile do
   def project do
     [
       app:             :test_that_json,
-      version:         "0.5.0",
-      elixir:          "~> 1.2",
+      version:         "0.5.1",
+      elixir:          "~> 1.6",
       build_embedded:  Mix.env == :prod,
       start_permanent: Mix.env == :prod,
       deps:            deps(),
@@ -55,9 +55,9 @@ defmodule TestThatJson.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      {:exjsx,   "~> 3.2.0"},
-      {:ex_doc,  "~> 0.13.0",  only: :dev},
-      {:espec,   "~> 1.0",     only: :test},
+      {:exjsx,   "~> 4.0.0"},
+      {:ex_doc,  "~> 0.18.3",  only: :dev},
+      {:espec,   "~> 1.5",     only: :test},
       {:inch_ex, only: :docs},
     ]
   end

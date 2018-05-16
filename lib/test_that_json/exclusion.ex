@@ -5,7 +5,7 @@ defmodule TestThatJson.Exclusion do
     for value <- list, do: exclude_keys(value)
   end
   def exclude_keys(map) when is_map(map) do
-    Map.drop(map, excluded_keys)
+    Map.drop(map, excluded_keys())
   end
   def exclude_keys(other), do: other
 

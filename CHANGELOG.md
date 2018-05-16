@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.5.1
+
+* Move to elixir 1.6.4, exjsx 4.0.0, exdoc 18.8.3, espec 1.5.1
+
 ## v0.5.0
 
 ### Backwards-Incompatible Changes
