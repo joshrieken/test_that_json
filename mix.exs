@@ -5,7 +5,7 @@ defmodule TestThatJson.Mixfile do
     [
       app:             :test_that_json,
       version:         "0.5.0",
-      elixir:          "~> 1.2",
+      elixir:          "~> 1.4",
       build_embedded:  Mix.env == :prod,
       start_permanent: Mix.env == :prod,
       deps:            deps(),
