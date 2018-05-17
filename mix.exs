@@ -55,7 +55,7 @@ defmodule TestThatJson.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      {:exjsx,   "~> 3.2.0"},
+      {:exjsx,   "~> 4.0"},
       {:ex_doc,  "~> 0.13.0",  only: :dev},
       {:espec,   "~> 1.0",     only: :test},
       {:inch_ex, only: :docs},
