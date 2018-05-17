@@ -49,7 +49,7 @@ defmodule TestThatJson.ExclusionSpec do
   end
 
   describe "excluded_keys" do
-    subject do: Exclusion.excluded_keys
+    subject do: Exclusion.excluded_keys()
 
     before do
       allow Configuration |> to(accept(:excluded_keys, fn -> [] end))

@@ -4,11 +4,11 @@ defmodule TestThatJson.ConfigurationSpec do
   alias TestThatJson.Configuration
 
   describe "excluded_keys" do
-    subject do: Configuration.excluded_keys
+    subject do: Configuration.excluded_keys()
 
     context "with no keys in the environment" do
       # Assumes no env-configured keys
-      it do: should eq(Configuration.default_excluded_keys)
+      it do: should eq(Configuration.default_excluded_keys())
     end
 
     context "with keys in the environment" do
